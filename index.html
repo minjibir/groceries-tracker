@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body style="background-color: rgb(146, 145, 138);">
+
+	<h2>Grocerry Receipt Tracker</h2>
+
+	<fieldset>
+		<legend>RECEIPT INFORMATION</legend>
+		<input type="text" placeholder="Receipt Number" id="receiptNumberTxt"><br>
+		<input type="number" placeholder="Total Amount" id="totalAmountTxt"><br>
+		<input type="date" id="purchaseDateTxt"><br>
+	</fieldset>
+
+	<div>
+		<p>Receipt Number: <span id="receiptNumberLabel"></span></p>
+		<p>Total Amount: <span id="totalAmountLabel"></span></p>
+		<p>purchaseDate: <span id="purchaseDateLabel"></span></p>
+	</div>
+
+	<fieldset>
+		<legend>ADD ITEM</legend>
+		<input type="text" placeholder="Barcode" id="itemBarcode">
+		<input type="text" placeholder="Item Name" id="itemName">
+		<input type="number" placeholder="Item Price" id="itemPrice"><br>
+		<button id="submitBtn">Add Item</button><br>
+	</fieldset>
+
+	<table id="itemListTable">
+		<tr>
+			<th>Barcode</th>
+			<th>Item Name</th>
+			<th>Item Price</th>
+		</tr>
+	</table>
+
+	<script type="text/javascript" src="script.js"></script>
+
+</body>
+
+</html>
