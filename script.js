@@ -13,7 +13,7 @@ purchaseDateTxt.addEventListener('change', () => {
 	document.querySelector('#purchaseDateLabel').textContent = purchaseDateTxt.value
 })
 
-const itemList = []
+const itemsMap = new Map()
 
 let totalAmount = 0
 
@@ -48,17 +48,16 @@ function addItem() {
 	itemBarcodeTxt.value = ''
 	itemNameTxt.value = ''
 	itemPriceTxt.value = ''
-	
+
 	totalAmount += +itemPrice
 	document.querySelector('#totalAmountLabel').textContent = totalAmount
 
 	// JSON - Javascript Object Notation
-	let item = {"barcode": itemBarcode, "name": itemName, "price": itemPrice}
+	let item = { "barcode": itemBarcode, "name": itemName, "price": itemPrice }
 
-	// List of Item JSON
-	itemList.push(item)
+	itemsMap.set(itemBarcode, item)
 
-	console.log("Items: ", itemList)
+	console.log("Items: ", itemsMap)
 
 	itemBarcodeTd.textContent = itemBarcode
 	itemNameTd.textContent = itemName
@@ -74,7 +73,14 @@ function addItem() {
 	itemListTable.appendChild(itemTr)
 
 	removeItemBtn.addEventListener('click', () => {
-		itemListTable.removeChild(removeItemBtn.parentElement.parentElement)
+		const row = removeItemBtn.parentElement.parentElement
+		const itemBarcodeKey = row.firstChild.textContent
+
+		itemsMap.delete(itemBarcodeKey)
+
+		itemListTable.removeChild(row)
+
+		console.log(itemsMap)
 	})
 
 }
