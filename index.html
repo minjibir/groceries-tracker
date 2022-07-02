@@ -14,22 +14,23 @@
 
 	<fieldset>
 		<legend>RECEIPT INFORMATION</legend>
-		<input type="text" placeholder="Receipt Number" id="receiptNumberTxt"><br>
-		<input type="number" placeholder="Total Amount" id="totalAmountTxt"><br>
-		<input type="date" id="purchaseDateTxt"><br>
+		<input type="text" placeholder="Receipt Number" id="receiptNumberTxt" pattern="[A-Z0-9]">
+		<input type="date" id="purchaseDateTxt">
 	</fieldset>
 
 	<div>
-		<p>Receipt Number: <span id="receiptNumberLabel"></span></p>
-		<p>Total Amount: <span id="totalAmountLabel"></span></p>
-		<p>purchaseDate: <span id="purchaseDateLabel"></span></p>
+		<p>
+			Receipt Number: <span id="receiptNumberLabel"></span><br>
+			Total Amount: <span id="totalAmountLabel"></span><br>
+			Purchase Date: <span id="purchaseDateLabel"></span>
+		</p>
 	</div>
 
 	<fieldset>
 		<legend>ADD ITEM</legend>
-		<input type="text" placeholder="Barcode" id="itemBarcode">
-		<input type="text" placeholder="Item Name" id="itemName">
-		<input type="number" placeholder="Item Price" id="itemPrice"><br>
+		<input type="text" placeholder="Barcode" id="itemBarcode" pattern="[0-9]">
+		<input type="text" placeholder="Item Name" id="itemName" pattern="[A-Za-z]">
+		<input type="text" placeholder="Item Price" id="itemPrice" pattern="[0-9]"><br>
 		<button id="submitBtn">Add Item</button><br>
 	</fieldset>
 
@@ -38,6 +39,7 @@
 			<th>Barcode</th>
 			<th>Item Name</th>
 			<th>Item Price</th>
+			<th>Ctl</th>
 		</tr>
 	</table>
 

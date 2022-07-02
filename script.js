@@ -1,33 +1,23 @@
-const submitBtn = document.getElementById('submitBtn')
+const submitBtn = document.querySelector('#submitBtn')
 submitBtn.addEventListener('click', addItem)
 
-const receiptNumberTxt = document.getElementById('receiptNumberTxt')
-const totalAmountTxt = document.getElementById('totalAmountTxt')
-const purchaseDateTxt = document.getElementById('purchaseDateTxt')
+const receiptNumberTxt = document.querySelector('#receiptNumberTxt')
+const totalAmountTxt = document.querySelector('#totalAmountTxt')
+const purchaseDateTxt = document.querySelector('#purchaseDateTxt')
 
-
-const totalAmount = totalAmountTxt.value
-const purchaseDate = purchaseDateTxt.value
-
-receiptNumberTxt.addEventListener('keypress', () => {
-	document.getElementById('receiptNumberLabel').textContent = receiptNumberTxt.value
+receiptNumberTxt.addEventListener('keyup', () => {
+	document.querySelector('#receiptNumberLabel').textContent = receiptNumberTxt.value
 })
 
-// Text display
+purchaseDateTxt.addEventListener('change', () => {
+	document.querySelector('#purchaseDateLabel').textContent = purchaseDateTxt.value
+})
 
-document.getElementById('totalAmountText').textContent = totalAmount
-document.getElementById('purchaseDateText').textContent = purchaseDate
+const itemList = []
+
+let totalAmount = 0
 
 function addItem() {
-	// Item
-	const itemBarcode = document.getElementById('itemBarcode').value
-	const itemName = document.getElementById('itemName').value
-	const itemPrice = document.getElementById('itemPrice').value
-
-	// Item Display
-	const itemBarcodeText = document.getElementById('itemBarcodeText')
-	const itemNameText = document.getElementById('itemNameText')
-	const itemPriceText = document.getElementById('itemPriceText')
 
 	// Items display table
 	const itemListTable = document.querySelector('#itemListTable')
@@ -39,6 +29,36 @@ function addItem() {
 	const itemBarcodeTd = document.createElement('td')
 	const itemNameTd = document.createElement('td')
 	const itemPriceTd = document.createElement('td')
+	const control = document.createElement('td')
+
+	const removeItemBtn = document.createElement('button')
+	removeItemBtn.innerText = "X"
+
+	control.appendChild(removeItemBtn)
+
+	// Item
+	const itemBarcodeTxt = document.querySelector('#itemBarcode')
+	const itemNameTxt = document.querySelector('#itemName')
+	const itemPriceTxt = document.querySelector('#itemPrice')
+
+	const itemBarcode = itemBarcodeTxt.value
+	const itemName = itemNameTxt.value
+	const itemPrice = itemPriceTxt.value
+
+	itemBarcodeTxt.value = ''
+	itemNameTxt.value = ''
+	itemPriceTxt.value = ''
+	
+	totalAmount += +itemPrice
+	document.querySelector('#totalAmountLabel').textContent = totalAmount
+
+	// JSON - Javascript Object Notation
+	let item = {"barcode": itemBarcode, "name": itemName, "price": itemPrice}
+
+	// List of Item JSON
+	itemList.push(item)
+
+	console.log("Items: ", itemList)
 
 	itemBarcodeTd.textContent = itemBarcode
 	itemNameTd.textContent = itemName
@@ -48,7 +68,13 @@ function addItem() {
 	itemTr.appendChild(itemBarcodeTd)
 	itemTr.appendChild(itemNameTd)
 	itemTr.appendChild(itemPriceTd)
+	itemTr.appendChild(control)
 
 	// Add row-element to the table
 	itemListTable.appendChild(itemTr)
+
+	removeItemBtn.addEventListener('click', () => {
+		itemListTable.removeChild(removeItemBtn.parentElement.parentElement)
+	})
+
 }
