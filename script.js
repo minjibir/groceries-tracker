@@ -57,8 +57,6 @@ function addItem() {
 
 	itemsMap.set(itemBarcode, item)
 
-	console.log("Items: ", itemsMap)
-
 	itemBarcodeTd.textContent = itemBarcode
 	itemNameTd.textContent = itemName
 	itemPriceTd.textContent = itemPrice
@@ -75,12 +73,49 @@ function addItem() {
 	removeItemBtn.addEventListener('click', () => {
 		const row = removeItemBtn.parentElement.parentElement
 		const itemBarcodeKey = row.firstChild.textContent
+		const removedItemPrice = row.children.item(2).textContent
+
+		console.log(removedItemPrice)
 
 		itemsMap.delete(itemBarcodeKey)
-
 		itemListTable.removeChild(row)
 
+		totalAmount -= +removedItemPrice
 		console.log(itemsMap)
 	})
 
+}
+
+const saveBtn = document.querySelector('#saveBtn')
+
+saveBtn.addEventListener('click', saveReceipt)
+
+function saveReceipt() {
+	const itemsInListForm = []
+
+	for (let item of itemsMap) {
+		itemsInListForm.push(item[1])
+	}
+
+	const receipt = {
+		"receiptAumber": receiptNumberTxt.value,
+		"totalAmount": totalAmount,
+		"purchaseDate": purchaseDateTxt.value,
+		"listOfItems": itemsInListForm
+	}
+
+	document.querySelector('#itemsMap').textContent = JSON.stringify(receipt)
+	
+	sendReceipt(receipt)
+}
+
+
+function sendReceipt(receipt) {
+	fetch('https://example.com/profile', {
+		method: 'POST', // or 'PUT'
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(receipt),
+	})
 }
