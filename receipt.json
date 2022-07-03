@@ -1,0 +1,22 @@
+{
+	"receiptAumber": "AM4343",
+	"totalAmount": 1100,
+	"purchaseDate": "2022-07-03",
+	"listOfItems": [
+		{
+			"barcode": "2434",
+			"name": "Gyada",
+			"price": "400"
+		},
+		{
+			"barcode": "7635",
+			"name": "Coke",
+			"price": "400"
+		},
+		{
+			"barcode": "7923",
+			"name": "Sugar",
+			"price": "300"
+		}
+	]
+}
